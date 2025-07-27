@@ -71,7 +71,7 @@ typst的code有以下特征
     }
 })
 
-利用位操作画紫微斗数十二宫（不知道也没有关系，一种玄学命盘）
+利用位操作画紫微斗数十二宫#footnote("一种玄学命盘，这里的数字顺序并不严谨，真实的命盘是逆时针或顺时针的顺序，这里命盘中的数字只是显示绘制顺序，因为是扫描式（一行一行）绘制的")
 #cetz.canvas({
     import cetz.draw: *
     let palaces = (0,1,2,3,4,7,8,11,12,13,14,15)
@@ -93,6 +93,56 @@ typst的code有以下特征
 })
 ```
 
-```typst
-= 基本语法
-```
+#cetz.canvas(({
+    import cetz.draw: *
+    let edge = 2
+    let palaces = (
+        (0, "命宫"),
+        (1, "兄弟宫"),
+        (2, "夫妻宫"),
+        (3, "子女宫"),
+        (4, "财帛宫"),
+        (7, "疾厄宫"),
+        (8, "迁移宫"),
+        (11, "交友宫"),
+        (12, "事业宫"),
+        (13, "田宅宫"),
+        (14, "福德宫"),
+        (15, "父母宫")
+    )//定出工位的索引和名称
+    for (index, name) in palaces {
+        rect(name: str(index),(index.bit-and(3) * edge, - index.bit-rshift(2) * edge), (index.bit-and(3) * edge + edge, - index.bit-rshift(2) * edge - edge))
+        content(name: str(index)+"text", (rel: (0, 0), to: str(index)))[#text(name, size: 0.4em)];//显示工位名称
+    }
+    move-to((rel: (- edge * 0.5, edge * 0.5), to: "15"))
+    line(name: "self0-15", (),(rel: (edge * 0.5, - edge * 0.5), to: "0"), mark: (start: ">", fill: red), stroke: red)
+    content(name: "self0-15d", (rel: (0.5em, 0), to: "self0-15"))[#text("A", size: 0.8em, stroke: red)];//显示工位名称
+    // let next(mark) = {
+    //     line((), (rel: (1, 0)), mark: mark)
+    //     move-to((rel: (-1, .25)))
+    // }
+
+    // set-style(fill: blue, mark: (fill: auto))
+    // rotate(190deg)
+
+    // let marks = (">", "<", "|", "<>", "o")
+    // for m in marks {
+    //     next((end: m))
+    // }
+
+    // for m in marks {
+    //     next((start: m))
+    // }
+
+    // fill(none)
+
+    // let marks = (">", "<")
+    // for m in marks {
+    //     next((end: m))
+    // }
+
+    // for m in marks {
+    //     next((start: m))
+    // }
+    //画出宫位的边框
+}))
