@@ -1,3 +1,4 @@
+#import "mod.typ" : mod
 = typst基本用法(基于版本： 0.13.1 (8ace67d9))
 
 === 实时编译
@@ -117,6 +118,10 @@ typst的code有以下特征
     move-to((rel: (- edge * 0.5, edge * 0.5), to: "15"))
     line(name: "self0-15", (),(rel: (edge * 0.5, - edge * 0.5), to: "0"), mark: (start: ">", fill: red), stroke: red)
     content(name: "self0-15d", (rel: (0.5em, 0), to: "self0-15"))[#text("A", size: 0.8em, stroke: red)];//显示工位名称
+                                                                                                            let num = 12
+                                                                                                            let res = mod(num)                                                                         
+    content(name: "bit-and", (rel: (0, -1.5em), to: "self0-15"))[#text("bit-and: " + str(res), size: 0.8em, stroke: red)];//显示位操作结果
+                                                                                                            
     // let next(mark) = {
     //     line((), (rel: (1, 0)), mark: mark)
     //     move-to((rel: (-1, .25)))
@@ -146,3 +151,5 @@ typst的code有以下特征
     // }
     //画出宫位的边框
 }))
+
+#include "ziwei.typ"
